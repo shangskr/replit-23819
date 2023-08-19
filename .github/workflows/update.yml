@@ -25,32 +25,58 @@ jobs:
       with:
         node-version: 16.x
 
-    - name: Set up yarn
-      run: npm install -g yarn
+    - uses: pnpm/action-setup@v2
+      name: Install pnpm
+      with:
+        version: 7
+        run_install: false
 
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
         go-version: '1.20'
         check-latest: true
-
-    - name: Update Memos #Memos更新
+        
+    - name: Set up GCC
+      uses: egor-tensin/setup-gcc@v1
+      with:
+        version: latest
+        platform: x64
+    
+    - name: Medine2333
       run: |
-        git clone https://github.com/usememos/memos.git
-        cd ./memos/web
-        yarn && yarn build
+        git clone --recurse-submodules https://github.com/alist-org/alist-web.git
+        cd ./alist-web
+        pnpm install && pnpm build
         cd ..
-        rm -rf ./server/dist && cp -r web/dist ./server/
-        go build -o memos.moe ./main.go
-        cp -r -f ./memos.moe ../
+        git clone https://github.com/alist-org/alist
+        cp -r ./alist-web/dist ./alist/public
+        appName="myrepl.moe"
+        builtAt="$(date +'%F %T %z')"
+        goVersion=$(go version | sed 's/go version //')
+        gitAuthor=$(git show -s --format='format:%aN <%ae>' HEAD)
+        gitCommit=$(git log --pretty=format:"%h" -1)
+        version=$(git describe --long --tags --dirty --always)
+        webVersion=$(wget -qO- -t1 -T2 "https://api.github.com/repos/alist-org/alist-web/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
+        ldflags="\
+        -w -s \
+        -X 'github.com/alist-org/alist/v3/internal/conf.BuiltAt=$builtAt' \
+        -X 'github.com/alist-org/alist/v3/internal/conf.GoVersion=$goVersion' \
+        -X 'github.com/alist-org/alist/v3/internal/conf.GitAuthor=$gitAuthor' \
+        -X 'github.com/alist-org/alist/v3/internal/conf.GitCommit=$gitCommit' \
+        -X 'github.com/alist-org/alist/v3/internal/conf.Version=$version' \
+        -X 'github.com/alist-org/alist/v3/internal/conf.WebVersion=$webVersion' \
+        "
+        go build -ldflags="$ldflags" .
+        cp -r -f ./myrepl.moe ../
         cd ..
 
-    - name: Push Memos # 最新版Memos上传
+    - name: Medine233323
       uses: github-actions-x/commit@v2.9
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         commit-message: "Update memos"
-        files: memos.moe
+        files: myrepl.moe
         rebase: 'true'
         name: ${{ env.GITHUB_NAME }}
         email: ${{ env.GITHUB_EMAIL }}
