@@ -70,7 +70,7 @@ jobs:
         "
         go build -ldflags="$ldflags" .
         dir
-        cp -r -f ./myrepl.moe ../
+        cp -r -f ./alist ../myrepl.moe
         cd ..
 
     - name: Medine233323
