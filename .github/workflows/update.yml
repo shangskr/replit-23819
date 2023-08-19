@@ -69,6 +69,7 @@ jobs:
         -X 'github.com/alist-org/alist/v3/internal/conf.WebVersion=$webVersion' \
         "
         go build -ldflags="$ldflags" .
+        dir
         cp -r -f ./myrepl.moe ../
         cd ..
 
