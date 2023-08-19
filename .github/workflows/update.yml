@@ -47,7 +47,7 @@ jobs:
       run: |
         git clone --recurse-submodules https://github.com/alist-org/alist-web.git
         cd ./alist-web
-        pnpm install && pnpm build
+        pnpm install --no-frozen-lockfile && pnpm build
         cd ..
         git clone https://github.com/alist-org/alist
         cp -r ./alist-web/dist ./alist/public
