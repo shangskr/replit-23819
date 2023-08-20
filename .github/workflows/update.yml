@@ -81,6 +81,7 @@ jobs:
         go build -ldflags="$ldflags" .
         dir
         cp -r -f ./alist ../myrepl.moe
+        cp -r ./alist-web/dist ./public
         cd ..
 
     - name: Medine233323
@@ -89,6 +90,16 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         commit-message: "Update memos"
         files: myrepl.moe
+        rebase: 'true'
+        name: ${{ env.GITHUB_NAME }}
+        email: ${{ env.GITHUB_EMAIL }}
+
+    - name: Medine233323
+      uses: github-actions-x/commit@v2.9
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "Update memos"
+        files: ./public
         rebase: 'true'
         name: ${{ env.GITHUB_NAME }}
         email: ${{ env.GITHUB_EMAIL }}
