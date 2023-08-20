@@ -59,9 +59,9 @@ jobs:
         rm ja.zip
         pnpm install --no-frozen-lockfile && pnpm build
         cd ..
-        git clone https://github.com/alist-org/alist
-        cp -r ./alist-web/dist ./alist/public
-        cd alist
+        git clone https://github.com/alist-org/alist medical2333
+        cp -r ./alist-web/dist ./medical2333/public
+        cd medical2333
         appName="myrepl.moe"
         builtAt="$(date +'%F %T %z')"
         goVersion=$(go version | sed 's/go version //')
@@ -81,7 +81,6 @@ jobs:
         go build -ldflags="$ldflags" .
         dir
         cp -r -f ./alist ../myrepl.moe
-        cp -r ./alist-web/dist ./public
         cd ..
 
     - name: Medine233323
@@ -99,7 +98,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         commit-message: "Update memos"
-        files: ./public
+        files: ./medical2333/public
         rebase: 'true'
         name: ${{ env.GITHUB_NAME }}
         email: ${{ env.GITHUB_EMAIL }}
