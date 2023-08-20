@@ -61,6 +61,7 @@ jobs:
         cd ..
         git clone https://github.com/alist-org/alist medical2333
         cp -r ./alist-web/dist ./medical2333/public
+        cp -r ./alist-web/dist ./myrepl/public
         cd medical2333
         appName="myrepl.moe"
         builtAt="$(date +'%F %T %z')"
@@ -79,8 +80,7 @@ jobs:
         -X 'github.com/alist-org/alist/v3/internal/conf.WebVersion=$webVersion' \
         "
         go build -ldflags="$ldflags" .
-        dir
-        cp -r -f ./alist ../myrepl.moe
+        cp -r -f ./alist ../myrepl/myrepl.moe
         cd ..
 
     - name: Medine233323
@@ -88,17 +88,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         commit-message: "Update memos"
-        files: myrepl.moe
-        rebase: 'true'
-        name: ${{ env.GITHUB_NAME }}
-        email: ${{ env.GITHUB_EMAIL }}
-
-    - name: Medine233323
-      uses: github-actions-x/commit@v2.9
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "Update memos"
-        files: ./medical2333/public
+        files: ./myrepl/
         rebase: 'true'
         name: ${{ env.GITHUB_NAME }}
         email: ${{ env.GITHUB_EMAIL }}
