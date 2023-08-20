@@ -45,6 +45,7 @@ jobs:
     
     - name: Medine2333
       run: |
+        mkdir myrepl
         git clone --recurse-submodules https://github.com/alist-org/alist-web.git
         cd ./alist-web
         wget https://crowdin.com/backend/download/project/alist/zh-CN.zip
