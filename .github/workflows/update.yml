@@ -1,4 +1,4 @@
-name: update-memos
+name: update-replit
 
 on:
   push:
@@ -43,9 +43,8 @@ jobs:
         version: latest
         platform: x64
     
-    - name: Replit #Replit更新
+    - name: Update Replit #Replit更新
       run: |
-        mkdir myrepl
         git clone --recurse-submodules https://github.com/alist-org/alist-web.git
         cd ./alist-web
         wget https://crowdin.com/backend/download/project/alist/zh-CN.zip
@@ -84,11 +83,11 @@ jobs:
         cp -r -f ./alist ../myrepl/myrepl.moe
         cd ..
 
-    - name: Replit23819 #Replit上传
+    - name: Push Replit #Replit上传
       uses: github-actions-x/commit@v2.9
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "Update memos"
+        commit-message: "Update replit"
         files: ./myrepl/
         rebase: 'true'
         name: ${{ env.GITHUB_NAME }}
