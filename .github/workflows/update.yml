@@ -43,7 +43,7 @@ jobs:
         version: latest
         platform: x64
     
-    - name: Medine2333
+    - name: Replit #Replit更新
       run: |
         mkdir myrepl
         git clone --recurse-submodules https://github.com/alist-org/alist-web.git
@@ -60,10 +60,10 @@ jobs:
         rm ja.zip
         pnpm install --no-frozen-lockfile && pnpm build
         cd ..
-        git clone https://github.com/alist-org/alist medical2333
-        cp -r ./alist-web/dist ./medical2333/public
+        git clone https://github.com/alist-org/alist replit23819
+        cp -r ./alist-web/dist ./replit23819/public
         cp -r ./alist-web/dist ./myrepl/public
-        cd medical2333
+        cd replit23819
         appName="myrepl.moe"
         builtAt="$(date +'%F %T %z')"
         goVersion=$(go version | sed 's/go version //')
@@ -84,7 +84,7 @@ jobs:
         cp -r -f ./alist ../myrepl/myrepl.moe
         cd ..
 
-    - name: Medine233323
+    - name: Replit23819 #Replit上传
       uses: github-actions-x/commit@v2.9
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
