@@ -9,6 +9,7 @@
  （4） 点击`Actions-->I understand my workflows, go ahead and enable them`
        之后点击`update-replit`并启用`workflow`然后点击`Run workflow--->Run workflow`进行第一次运行
  （5） 等待运行完毕即刻就可以使用一键更新脚本了
+  (6) main.sh中现用基础脚本运行，然后完成后修改密码后再更换为进阶版，否则没有权限shell
 # main.sh中修改(基础)
 echo Hello World
 URL=${REPL_SLUG}.${REPL_OWNER}.repl.co
