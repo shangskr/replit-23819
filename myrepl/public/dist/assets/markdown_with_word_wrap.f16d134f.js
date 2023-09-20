@@ -1,0 +1,1 @@
+import{j as t,$ as o}from"./index.7da23b7b.js";import{e as n}from"./useUtil.5fb3437a.js";import{M as a}from"./EncodingSelect.d96821d4.js";import"./api.6d4ccc5d.js";const m=()=>{const[e]=n();return t(o,{get loading(){return e.loading},get children(){return t(a,{class:"word-wrap",get children(){var r;return(r=e())==null?void 0:r.content}})}})};export{m as default};
