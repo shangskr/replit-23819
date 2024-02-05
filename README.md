@@ -1,4 +1,5 @@
 # replit-GitHub action
+ fork的项目点击settings启用Allow all actions and reusable workflows
 （1） 打开https://github.com/settings
  （2） 找到Developer settings打开Personal access tokens的Tokens (classic)创建一个不过期的Tokens待用 
        (注意勾选repo的全部选项和勾选workflow)
